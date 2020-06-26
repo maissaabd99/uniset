@@ -1,0 +1,32 @@
+create table cat_four(
+codf varchar2(10) PRIMARY KEY,
+nomf varchar2(300),
+nbprod number(5),
+ca number(10,3),
+categorie varchar2(1000));
+Set serveroutput on 
+DECLARE
+    cod fournisseur.codf%type;
+    nom fournisseur.nomf%type;
+    cat cat_four.categorie%type;
+    nbr cat_four.nbprod%type;
+    caf cat_four.ca%type;
+    cursor four is select codf from fournisseur;
+
+BEGIN
+    open four;
+    loop
+       fetch four into cod;
+         select fer.nomf  , count(refp) , sum(puf*qtef)  into nom , nbr , caf  from frs_prod f ,fournisseur fer 
+         where f.codf=cod and fer.codf=f.codf group by refp , nomf;
+         if caf>=10000 then cat:='Fournisseur important !';
+         elsif caf<10000 and caf>=1000  then cat:='Fournisseur moyen !';
+         elsif caf<1000 then cat:='Fournisseur passager !';
+         end if;
+         insert into cat_four values(cod,nom,nbr,caf,cat);
+         commit;
+         exit when four%notfound;
+    end loop;
+    close four;
+END;
+/

@@ -1,0 +1,67 @@
+{% include 'header.html.twig' %}
+{% block body %}
+    <style>
+        hr{
+            color:darkorange;
+            height: 8px;
+        }
+        tr th{
+            font-weight: bold;
+        }
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:  #D5E9F1 ">
+    <div class="main" >
+        <h2 style="margin-left:120px ">Espace Etudiant <span style="color:#1b6d85;font-size: small"> >> </span> Matière<span style="color:#1b6d85;font-size: small"> >> </span> <span style="font-size: 23px;color: #1b6d85"> {{ matiere.libelle }}</span></h2>
+        <input style="position:absolute;margin-top: 30px;margin-left: 150px" id="search" placeholder="search..."/> <button style="margin-left:680px;width:70px;margin-top:30px;padding:18px;border:none" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:600px;height: 750px;position:absolute;margin-left:150px;margin-top:20px">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success" style="font-size: 25px">
+                    <span class=" alert alert-success badge badge-pill badge-success" style="text-align: center;font-size: 20px"></span> &nbsp; {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+            <hr>
+            <table class="table table-hover">
+                <thead class="thead-dark text-center">
+                <tr style="color: #5cb85c;font-family: Calibri,serif">
+                    <th scope="col" >Supports</th>
+                    <th scope="col" ></th>
+                    <th scope="col" >Action</th>
+                </tr>
+                </thead>
+                <tbody>
+               {% for support in supports %}
+                <tr>
+                    <td>{{ support.nom }}</td>
+                    <td><a href="{{ asset('uploads/supports/' ~ support.contenu) }}"><button class="btn btn-select-plan"> {{ support.nom }}</button></a></td>
+                    {% if support.espaceDepot=="oui"  %}
+                        <td><a href="{{ path('deposesupport',{'id':support.id}) }}" ><i class="fas fa-hand-holding-medical" style="font-size: 24px;color:darkorange" title="Déposer un travail"></i></a></td>
+                    {% else %}
+                        <td><a  disabled><i class="fas fa-hand-holding-medical" style="font-size: 24px;color:silver" title="Aucun espace de deport"></i></a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tbody>
+            </table>
+            <a href="{{ path('etudmatieres') }}" ><button style="margin-left:220px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+        </div>
+
+        <div style="background-color:white;border-radius:0%;width:350px;height: 750px;position:absolute;margin-left:770px;margin-top:-55px">
+            <img src= "/images/adminis/{{ app.user.img}}" style="margin-left: 100px;margin-top: 50px;width: 150px;height: 150px;border-radius: 50%" alt="Img User" >
+            <br><br>
+            <h3 style="text-align: center;color:darkorange"> <a href="{{path('logout')}}">{{  app.user.username}}</a></h3>
+            <h5 style="text-align: center;color:midnightblue;font-weight: bold"></h5>
+            <br><br>
+        </div>
+    </div>
+    </body>
+    {% include 'footer.html.twig' %}
+{% endblock %}

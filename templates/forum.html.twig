@@ -1,0 +1,107 @@
+{% include 'header.html.twig' %}
+{% block body %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        hr{
+            color:darkorange;
+            height: 8px;
+        }
+        tr th{
+            font-weight: bold;
+        }
+        /* Chat containers */
+        .container {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 10px 0;
+            margin-left: 140px ;
+            width:85%;
+            height: 90px;
+            transition: transform 0.5s;
+            /*transition-delay: 0.5s;*/
+
+        }
+        /* Darker chat container */
+        .darker {
+            border-color: #ccc;
+            background-color: #ddd;
+        }
+        /* Clear floats */
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Style images */
+        .container img {
+            float: left;
+            max-width: 50px;
+            width: 90%;
+            margin-right: 20px;
+            border-radius: 80%;
+        }
+
+        /* Style the right image */
+        .container img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right:0;
+        }
+
+        /* Style time text */
+        .time-right {
+            float: right;
+            color: #aaa;
+        }
+
+        /* Style time text */
+        .time-left {
+            float: left;
+            color: #999;
+        }
+        p{
+            font-size: 19px;
+        }
+        #div1:hover {
+           /* height: 100px;
+            width:87%;*/
+            transform: scale(1.04);
+
+        }
+        a div span{
+            text-decoration:none;        }
+        a div h4{
+            text-decoration:none;        }
+    </style>
+    <body style="background-color: #D5E9F1 ">
+    <div class="main" >
+        <h3 style="margin-left:120px ">Espace Etudiant <span style="color:#1b6d85"> <i class="fas fa-angle-double-right" style="font-size: 18px"></i>  Forum de discussion</span></h3>
+        <br>
+        <a href="{{ path('createpost') }}"><button class="btn btn-success" style="padding: 10px;position:absolute;left: 1015px;width:300px">Créer un post </button></a>
+  <br><br>
+      {% for post in posts %}
+        <a href="{{ path('reponsespost',{'id': post.id}) }}"><div class="container" id="div1">
+            <img src="/images/adminis/{{post.user.img}}"  alt="Avatar">
+            <span style="font-size: 15px;color: #aaa;">{{ post.user.username}}</span>
+            <br>
+            <h4>{{ post.topic}}</h4>
+            <span class="time-right"><i class="far fa-comment"></i> {{ post.reponses |length}} réponses | {{ post.datePost | date}}
+                {% if app.user.username ==post.user.username%}
+                    <br><a href="{{path('delpost',{'id':post.id}) }}"> <i class="fas fa-trash" title="Supprimer ce post" style="position:relative;left: 900px;font-size: 22px;margin-top: -50px"></i></a>
+                {% endif %}
+            </span>
+        </div>
+        </a>
+      {% endfor %}
+        <!--div class="container darker">
+            <img src="/images/adminis/{/{ app.user.img}}" alt="Avatar" class="right">
+          <br>  <p>Hey! I'm fine. Thanks for asking!</p>
+            <span class="time-left">11:01</span>
+        </div-->
+    </div>
+    </body>
+{% endblock %}

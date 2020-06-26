@@ -1,0 +1,31 @@
+create table vente_prod(
+refp varchar2(6) PRIMARY KEY,
+libp varchar2(20),
+pu number(10,3),
+qte_vendu number(4));
+delete from vente_prod;
+Set serveroutput on 
+DECLARE
+    ref produit.refp%type;
+    lib produit.libp%type;
+    prix produit.pu%type;
+    qtevendu number(4);
+    cursor prod is select refp , libp , pu  from produit;
+
+BEGIN
+open prod;
+DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------------------');
+DBMS_OUTPUT.PUT_LINE('    Reference      |     Prix Unitaire     |    Libelle    |   Qte Vendu');
+     loop
+         DBMS_OUTPUT.PUT_LINE('--------------------------------------------------------------------');
+         fetch prod into ref , lib , prix;
+         select count(refp) into qtevendu from lig_cde where refp=ref;
+         DBMS_OUTPUT.PUT_LINE('*    '||ref||'      |             '||prix||'        | '  ||lib||'     | ' ||qtevendu||'');
+         INSERT INTO vente_prod values(ref,lib,prix,qtevendu);
+         commit;
+         exit when prod%notfound;
+     End Loop;
+CLOSE prod;
+end;
+/
+

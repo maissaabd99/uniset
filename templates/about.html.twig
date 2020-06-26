@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+{% block bodtt %}
+
+<style>
+	.img {
+		border:2px solid #fff;
+		box-shadow: 2px 2px 2px 2px white;
+		-moz-box-shadow: 2px 2px 2px white;
+		-webkit-box-shadow: 2px 2px 2px white;
+		-khtml-box-shadow: 2px 2px 2px white;
+	}
+	a{
+		color:#1b6d85;
+	}
+
+</style>
+	<!------------------------------------------------->
+
+<div class="fh5co-loader"></div>
+
+	<nav class="fh5co-nav" role="navigation">
+		<div class="top" >
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-right">
+						<p class="num">Call: +01 123 456 7890</p>
+						<ul class="fh5co-social">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+							<li><a href="#"><i class="icon-github"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="top-menu" >
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-1">
+						<svg class="Icon_material_school" viewBox="1.5 4.5 172.964 170.508" style="color: rgba(255,106,76,1);">
+							<path fill="rgba(55,66,145,1)" id="Icon_material_school" d="M 32.94804382324219 100.9316787719727 L 32.94804382324219 138.8223266601563 L 87.98211669921875 175.0078735351563 L 143.0161743164063 138.8223266601563 L 143.0161743164063 100.9316787719727 L 87.98211669921875 137.1172332763672 L 32.94804382324219 100.9316787719727 Z M 87.98211669921875 4.499999046325684 L 1.499999761581421 61.33596038818359 L 87.98211669921875 118.1719207763672 L 158.7402038574219 71.66116333007813 L 158.7402038574219 137.1172332763672 L 174.4642181396484 137.1172332763672 L 174.4642181396484 61.33596038818359 L 87.98211669921875 4.499999046325684 Z">
+							</path>
+						</svg>
+						<div id="UNISET" >
+							<span style="color:white;">&nbsp;&nbsp;UNISET</span>
+						</div>
+					</div>
+					<div class="col-xs-11 text-right menu-1">
+						<ul>
+							<li class="active"><a href="{{path('login')}}">Accueil</a></li>
+							<li><a href="{{path('login')}}">Cours</a></li>
+							<li><a href="{{path('login')}}">Tarification</a></li>
+							<li class="has-dropdown">
+								<a href="{{path('login')}}">Blog</a>
+								<ul class="dropdown">
+									<li><a href="#">Web Design</a></li>
+									<li><a href="#">eCommerce</a></li>
+									<li><a href="#">Branding</a></li>
+									<li><a href="#">API</a></li>
+								</ul>
+							</li>
+							<li><a href="{{path('login')}}">Contact</a></li>
+							<li class="btn-cta"><a href="{{path('login')}}"><span>S'identifier</span></a></li>
+							<li class="btn-cta"><a href="{{path('login')}}"><span>Créer un cours</span></a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</nav>
+
+	<header>
+		<div style="background-color:#D0FAFB ;width: 100%;height:1000px;position: relative">
+			<img src="{{asset('images/about.png')}}" width="50%" height="600px" alt="about UNISET" style="margin-left:25%;margin-top:200px;opacity: 0.8" class="shadow-lg p-3 mb-5 rounded"/>
+		</div>
+		<!--img src="{/{asset('images/blue.png')}}" width="100%" height="800px" alt="about UNISET" /-->
+
+
+		
+
+	</header>
+	<h1 style="text-align:center; font-weight:bold; margin-top:50px">Contactez Nous</h1>
+	{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+	<div id="fh5co-contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5 col-md-push-1 animate-box">
+					
+					<div class="fh5co-contact-info">
+						<h3>Contact Information</h3>
+						<ul>
+							<li class="address">47, Rue des Entrepreneurs Charguia II <br>2035- Tunis Carthage (Tunisie)</li>
+							<li class="phone"><a href="tel://1234567920">+216 28 249 582</a></li>
+							<li class="email"><a href="mailto:info@yoursite.com">karkaradsi21@gmail.com</a></li>
+						</ul>
+					</div>
+
+				</div>
+
+				<div class="col-md-6 animate-box">
+					<h3>Get In Touch</h3>
+					{{ form_start(form) }}
+
+						<div class="row form-group">
+							<div class="col-md-6" >
+								<!-- <label for="fname">First Name</label> -->
+								{{ form_widget(form.prenom) }}
+							</div>
+							<div class="col-md-6" >
+								<!-- <label for="lname">Last Name</label> -->
+								{{ form_widget(form.nom) }}
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-12">
+								<!-- <label for="email">Email</label> -->
+								{{ form_widget(form.email) }}
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-12">
+								<!-- <label for="subject">Subject</label> -->
+								{{ form_widget(form.sujet) }}
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col-md-12" >
+								<!-- <label for="message">Message</label> -->
+
+							{{ form_widget(form.contenu) }}
+							</div>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary ">Send Message</button>
+						</div>
+
+					{{ form_end(form) }}
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<!------------------------------------------------------------>
+
+
+
+
+<!-- jQuery -->
+{% endblock %}

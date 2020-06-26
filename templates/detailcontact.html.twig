@@ -1,0 +1,52 @@
+{% block title %} Espace Administrateur {% endblock %}
+{% include 'header.html.twig' %}
+
+
+{% block body %}
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+              &nbsp; &nbsp; &nbsp; <a href="{{ path('logout')}}"><i class="fa fa-sign-out" style="font-size:20px;color: #3f3f3f" title="Logout"></i></a>
+        </div>
+        <h2 style="margin-left:120px;margin-top: -40px ">  Espace Administrateur </h2>
+        <br/>
+            &nbsp;&nbsp; <img class=" rounded-circle"  src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px"/>
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+
+
+
+        <div style="background-color:white;border-radius:0%;width:600px;height: 400px;position:absolute;margin-left:350px;margin-top:30px">
+
+
+
+
+            <div class="col-lg-12 col-lg-offset-3 row"style="margin-top: 5%;margin-left:2%;">
+
+
+                <div class="border" style="position: absolute;left: 20% ;border-width: 2px;width: 330px;">
+                    <div style="background-color: #32383e;color: #32383e ">kkkk</div>
+                    <div style="padding: 4%;">
+                        <p><i class="fa fa-user "></i>  Mail </p>
+                        <p style="color: black;"> <i class="fa fa-long-arrow-right "></i>  {{a.email}}</p>
+
+                        <p><i class="fa fa-mail-forward (alias) "></i>  Sujet </p>
+                        <p style="color: black;"><i class="fa fa-long-arrow-right "></i>  {{a.sujet}}</p>
+
+                        <p ><i class="fa  fa-envelope"></i>  Message </p>
+                        <p style="color: black;  width: 300px;word-wrap: break-word;"> {{a.contenu}}</p>
+                        <br/> <br/>
+                        <pre style="padding-top: 5%">    <a href="{{ path('messages') }}" ><button type="button" class="btn btn-dark" style="width: 117px"><i class="fa fa-hand-o-left" ></i>&nbsp;Retour</button></a>  <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new" ><button type="button" class="btn btn-secondary" style="width: 117px"><i class="fa fa-envelope-o" ></i>&nbsp;répondre</button></a></pre>
+                    </div>
+                </div>
+            <div id="piechart"></div>
+        </div>
+    </div>
+    </div>
+    </body>
+{% endblock %}

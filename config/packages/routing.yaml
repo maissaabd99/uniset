@@ -1,0 +1,6 @@
+framework:
+    router:
+        utf8: true
+
+#parameters:
+#    file_directory:'%kernel.root_dir%/../web/uploads/files'

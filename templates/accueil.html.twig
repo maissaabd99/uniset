@@ -1,0 +1,291 @@
+{% extends 'base.html.twig' %}
+
+{% block bodtt  %}
+    <link rel="icon" href="{{ asset('images/lasticon.ico') }}" />
+
+    <header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/l.jpg);" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <div class="display-t">
+                        <div class="display-tc animate-box" data-animate-effect="fadeIn">
+                            <h1>The Art of Teaching is the Art of Assisting Discovery</h1>
+                            <h2>All ISETS In One</h2>
+                            <p><a class="btn btn-primary btn-lg btn-learn" href="{{path('login')}}">Take A Course</a> <a class="btn btn-primary btn-lg " href="{{path('about')}}"> Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="fh5co-counter" class="fh5co-counters">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 text-center animate-box">
+                    <span class="fh5co-counter js-counter" data-from="0" data-to="40356" data-speed="5000" data-refresh-interval="50"></span>
+                    <span class="fh5co-counter-label">Etudiant</span>
+                </div>
+                <div class="col-md-3 text-center animate-box">
+                    <span class="fh5co-counter js-counter" data-from="0" data-to="30290" data-speed="5000" data-refresh-interval="50"></span>
+                    <span class="fh5co-counter-label">Cours</span>
+                </div>
+                <div class="col-md-3 text-center animate-box">
+                    <span class="fh5co-counter js-counter" data-from="0" data-to="2039" data-speed="5000" data-refresh-interval="50"></span>
+                    <span class="fh5co-counter-label">Enseignants</span>
+                </div>
+                <div class="col-md-3 text-center animate-box">
+                    <span class="fh5co-counter js-counter" data-from="0" data-to="24" data-speed="5000" data-refresh-interval="50"></span>
+                    <span class="fh5co-counter-label">ISET'S</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fh5co-explore" class="fh5co-bg-section">
+        <div class="fh5co-explore fh5co-explore1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-push-5 animate-box">
+                        <img class="img-responsive" src="{{ asset('images/work_1.jpg')}}" alt="work">
+                    </div>
+                    <div class="col-md-4 col-md-pull-8 animate-box">
+                        <div class="mt">
+                            <h3>Tout ce dont vous avez besoin est ici !</h3>
+                            <p>Cette plate-forme contient  les documents de 24  de Tunis .</p>
+                            <ul class="list-nav">
+                                <li><i class="icon-check2"></i>Cours.</li>
+                                <li><i class="icon-check2"></i>Examens corrigés</li>
+                                <li><i class="icon-check2"></i>TD'S corrigés</li>
+                            </ul>
+                            <p><a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"> Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fh5co-explore">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-pull-1 animate-box">
+                        <img class="img-responsive" src="{{ asset('images/l1.jpg')}}" alt="work">
+                    </div>
+                    <div class="col-md-4 animate-box">
+                        <div class="mt">
+
+                            <div>
+                                <h4><i class="icon-shield"></i>Rapports</h4>
+                                <p>Les meilleurs rapports de chaque année universitaire ,validés par des enseignants. </p>
+                            </div>
+                            <div>
+                                <h4><i class="icon-video2"></i>Validation de votre rapport</h4>
+                                <p>Cette plate-forme offre la possibilité de valider votre rapport par des enseignants pour mieux réussir son Stage. </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fh5co-project">
+        <div class="container">
+            <div class="row animate-box">
+                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                    <h2>Exemple Des Cours Déposés</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid proj-bottom">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+                    <a href="#"><img src="{{ asset('images/c1.jpg')}}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                        <h3>Python</h3>
+                        <span>voir cours</span>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+                    <a href="#"><img src="{{ asset('images/c2.jpg')}}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                        <h3>Java</h3>
+                        <span>voir cours</span>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+                    <a href="#"><img src="{{ asset('images/c3.jpg')}}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                        <h3>Angular</h3>
+                        <span>voir cours</span>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+                    <a href="#"><img src="{{ asset('images/c4.jpg')}}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                        <h3>symfony</h3>
+                        <span>voir cours</span>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+                    <a href="#"><img src="{{ asset('images/c5.jpg')}}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                        <h3>CSS</h3>
+                        <span>voir cours</span>
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+                    <a href="#"><img src="{{ asset('images/c6.jpg')}}" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+                        <h3>Javascript</h3>
+                        <span>voir cours</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    <div id="fh5co-steps">
+        <div class="container">
+            <div class="row animate-box">
+                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                    <h2>Commencer un cours</h2>
+                </div>
+            </div>
+
+            <div class="row bs-wizard animate-box" style="border-bottom:0;">
+
+                <div class="col-xs-3 bs-wizard-step complete">
+                    <div class="text-center bs-wizard-stepnum"><h4>Etape 1</h4></div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center"><p>Créer un Compte Enseignant</p></div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step active"><!-- complete -->
+                    <div class="text-center bs-wizard-stepnum"><h4>Etape 2</h4></div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center"><p>Déposer Des Documents</p></div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled"><!-- complete -->
+                    <div class="text-center bs-wizard-stepnum"><h4>Etape 3</h4></div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center"><p>Aider Les Etudiants</p></div>
+                </div>
+
+                <div class="col-xs-3 bs-wizard-step disabled"><!-- active -->
+                    <div class="text-center bs-wizard-stepnum"><h4>Etape 4</h4></div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <a href="#" class="bs-wizard-dot"></a>
+                    <div class="bs-wizard-info text-center"><p>Aider Les Enseignants</p></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="fh5co-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <div class="fh5co-blog animate-box" >
+                        <div style="position:relative; height:400px">
+                            <div style="position:absolute;z-index:1">
+                                <a href="#"><img class="img-responsive" src="{{ asset('images/ID1.png')}}" alt=""></a>
+                            </div>
+                            <div style="position:absolute;top:50px; width:600px; height:400px; z-index:2;font-size:200%;left: 95px">
+                                <div id="Vous__tes">
+                                    <span>Vous êtes</span>
+                                </div>
+                            </div>
+                            <div style="position:absolute;top:75px; width:600px; height:400px; z-index:2;font-size:200%;left: 40px">
+
+                            <div id="Enseignant">
+                                    <span>Enseignant</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="position:absolute;top:179px; width:600px; height:400px; z-index:2;font-size:200%;left: 140px;">
+
+                        <div id="En_savoir_plus">
+                            <a href="#" ><span >En savoir plus</span></a>
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="fh5co-blog animate-box" >
+                        <div style="position:relative; height:400px">
+                            <div style="position:absolute;z-index:1">
+                                <a href="#"><img class="img-responsive" src="{{ asset('images/ID1.png')}}" alt=""></a>
+                            </div>
+                            <div style="position:absolute;top:50px; width:600px; height:400px; z-index:2;font-size:200%;left: 95px">
+                                <div id="Vous__tes">
+                                    <span>Vous êtes</span>
+                                </div>
+                            </div>
+                            <div style="position:absolute;top:75px; width:600px; height:400px; z-index:2;font-size:200%;left: 65px">
+
+                                <div id="Enseignant">
+                                    <span>Etudiant</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="position:absolute;top:179px; width:600px; height:400px; z-index:2;font-size:200%;left: 140px;">
+
+                            <div id="En_savoir_plus">
+                                <a href="#" ><span >En savoir plus</span></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="fh5co-blog animate-box" >
+                        <div style="position:relative; height:400px">
+                            <div style="position:absolute;z-index:1">
+                                <a href="#"><img class="img-responsive" src="{{ asset('images/ID1.png')}}" alt=""></a>
+                            </div>
+                            <div style="position:absolute;top:50px; width:600px; height:400px; z-index:2;font-size:200%;left: 95px">
+                                <div id="Vous__tes">
+                                    <span>Vous êtes</span>
+                                </div>
+                            </div>
+                            <div style="position:absolute;top:75px; width:600px; height:400px; z-index:2;font-size:200%;left: 95px">
+
+                                <div id="Enseignant">
+                                    <span>Admin</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="position:absolute;top:179px; width:600px; height:400px; z-index:2;font-size:200%;left: 140px;">
+
+                            <div id="En_savoir_plus">
+                                <a href="#" ><span >En savoir plus</span></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fh5co-started" style="background-image:url(images/img_bg_2.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row animate-box">
+                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                    <h2>Commençons</h2>
+                    <p>La création de compte et valable seulement pour les étudiants et les enseignants de 24 ISET's.</p>
+                </div>
+            </div>
+            <div class="row animate-box">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <p><a href="#" class="btn btn-default btn-lg">Créer Un Compte</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

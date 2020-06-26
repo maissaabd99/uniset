@@ -1,0 +1,86 @@
+{% block title %}Ensiegnant {% endblock %}
+{% include 'header.html.twig' %}
+{% block body %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp;<i class="fa fa-sign-out" style="font-size:20px" title="Logout"></i>
+        </div>
+        <h3 style="margin-left:120px;margin-top: -40px ">Espace Enseignant <span style="color:#1b6d85;font-size: small"><i class="fas fa-angle-double-right" style="font-size: 18px"></i> </span> Matières <span style="color:#1b6d85"><i class="fas fa-angle-double-right" style="font-size: 18px"></i>  {{ matiere.libelle }} </span></h3>
+        <img src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px">
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+        <input style="position:absolute;margin-top: 30px;margin-left: 110px;width: 550px" id="search" placeholder="search..."/> <button style="border:none;margin-left:660px;width:70px;margin-top:30px;padding:18px;" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:620px;height: 750px;position:absolute;margin-left:110px;margin-top:20px">
+            <br><br><h4 style="margin-left:15px;color:#1b6d85;margin-top:-20px"> Les étudiants qui ont déposé</h4>
+            <hr>
+            <table class="table table-hover text-center">
+                <thead class="thead-dark text-center">
+                <tr style="color: #5cb85c;font-family: Calibri,serif">
+                    <th scope="col" >Etudiant</th>
+                    <th scope="col" >Classe</th>
+                    <th scope="col" >Date de dépôt</th>
+                    <th scope="col" >Travail</th>
+                    <th scope="col" >Note</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for deposer in deposers %}
+                    <tr>
+                        <td>{{deposer.etudiant.nom |upper}} {{deposer.etudiant.prenom}}</td>
+                        <td>{{ deposer.etudiant.classe.nom}}</td>
+
+                        <td>{{ deposer.date |date("m/d/Y") }}</td>
+                        <td><a href="{{ path('download',{'id':deposer.id}) }}"><button class="btn btn-select-plan" style="font-size: 11px"> {{ deposer.travail }}</button></a></td>
+                       {% if deposer.note >0 %}
+                           <td><a href="{{ path('noter_travail',{'id':deposer.id}) }}"> <i class="fas fa-marker"></i> Modifer</a><br><span style="font-size: 13px;color:silver" >{{ deposer.note }}</span></td>
+                       {% else %}
+                            <td><a href="{{ path('noter_travail',{'id':deposer.id}) }}"> <i class="fas fa-marker"></i> Noter</a><br></td>
+                       {% endif %}
+                            </tr>
+                {% else %}
+                    <td colspan="2" style="text-align: center;font-family: Calibri,serif">Aucun étudiant n'a déposé</td>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('enst') }}" ><button style="margin-left:220px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+        </div>
+        <div style="background-color:white;border-radius:0%;width:410px;height: 750px;position:absolute;margin-left:750px;margin-top:-55px">
+            <br>
+            <h3 style="color:orangered;text-align: center;margin-top: 15px">Statistiques</h3>
+            <hr>
+            <div id="piechart"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'number'],
+                ['Total étudiants',{{ total }}],
+                ['Etudiants qui ont deposé', {{ deposers|length }}],
+            ]);
+            // Optional; add a title and set the width and height of the chart
+            var options = {'title':"Espace de dépôt", 'width':400, 'height':400};
+
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+    </body>
+    {% include 'footer.html.twig' %}
+{% endblock %}

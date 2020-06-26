@@ -1,0 +1,31 @@
+create table credit_cli(
+  codc number(4) primary key,
+  ville varchar2(20),
+  cred number(10,3),
+  pourcentCredCA varchar2(20),
+  pourcentCredCredmax varchar2(20));
+delete from credit_cli;
+Set serveroutput on 
+DECLARE   
+    code client.codc%type;
+    cred client.cred%type;
+    villevar client.ville%type;
+    pcca credit_cli.pourcentCredCA%type;
+    pccmax  credit_cli.pourcentCredCredmax%type;
+    cursor clnt(villevar char) is select cred,codc,ca,credmax
+                               from client  
+                               where  ville=villevar and cred>0;
+
+BEGIN
+      villevar:='&villevar';
+      for c in clnt(villevar) loop
+        pcca:=(c.cred*100)/c.ca ||'% sur '||c.ca;
+        pccmax:=(c.cred*100)/c.credmax ||'% sur ' ||c.credmax;
+        insert into credit_cli values (c.codc,villevar,c.cred,pcca,pccmax);
+        commit;
+      end loop;
+END;
+/
+
+
+

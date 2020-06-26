@@ -1,0 +1,38 @@
+Question 4
+
+Evolution globale : 
+* On a changé la langue du BMC de l'Anglais vers le Français,
+puisque on a vu qu'en français ça va etre plus compréhensible à présenter .
+* Le template du BMC a été changé aussi pour qu'il soit plus agréable ,lisible et moins ennuyeux.
+
+Evolution de certains bloc:
+* Le bloc 'Customer segments' a eu quelques corrections puisqu'en quelque sorte il n'était pas carrment correcte :
+'book publishers' et 'painters' ne sont pas des clients , mais surement des partaires.
+
+* Des changement ont été apporté pour le bloc de 'Key activities':
+- On a ajouté les chanllenges littéraires pour les lectuers.
+-On a ajouté les clubs de livres 'Book Clubs' pour plus encourager à lire .
+-On a ajouté le service de livraison pour améliorer les srouces des revenues. 
+
+*Pour le bloc 'Cost Structure'
+-Les livreurs ont été ajouté au côut de la main-d'œuvre dû au changement affecté au bloc «Key activities» (Service de livraison).
+
+*Bloc 'Revenue Streams' :
+- Les frais des livraisons été ajouté dû au changement affecté au bloc «Key activities» (Service de livraison).
+
+
+*******************************************
+* Elaborer le business plan :
+     - quel est le montant du financement nécessaire pour le lancement de notre projet ?
+     - quel revenu puissons-nous espérer de notre future activité  ?
+* Travailler et  boucler le financement du projet 
+* S'accorder avec les maisons de distribution.
+*  L’étude de marché 
+* Le besoins fonctionnels (Les diffrents services que la platforme offre)
+* Le besoins non fonctionnels (Besoins en matière de performance).
+* Diagramme de cas d'utilisation(pour donner une vision globale du comportement fonctionnel).
+* Conception  de la base de données .
+* Partage des taches entre les membres de l'équipe.
+* Développement de la plateforme .
+* 
+

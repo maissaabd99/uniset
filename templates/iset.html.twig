@@ -1,0 +1,142 @@
+{% block title %}Ensiegnant {% endblock %}
+{% include 'header.html.twig' %}
+{% block body %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+        .accordion {
+            background-color:#F5F7F7;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 90%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            margin-left: 5%;
+        }
+        .accordion:after {
+            content: '\002B';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 8%;
+        }
+        .active, .accordion:hover {
+            background-color: #D3F3F4;
+        }
+        .active:after {
+            content: "\2212";
+        }
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border: none;
+            /*margin-left: 5%;*/
+        }
+        .panel1 {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: visible;
+            transition: max-height 0.2s ease-out;
+            border: none;
+            /*margin-left: 5%;*/
+        }
+    </style>
+    {% set count = 0 %}
+    {% set var =count %}
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;"><
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp; <a href="{{ path('logout')}}"><i class="fa fa-sign-out" style="font-size:20px;color: #3f3f3f" title="Logout"></i></a>
+        </div>
+        <h2 style="margin-left:120px;margin-top: -40px ">Espace Enseignant <span style="color:#1b6d85;font-size: small"> >> </span> ISETs </h2>
+        <img src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px">
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+        <input style="position:absolute;margin-top: 30px;margin-left: 120px" id="search" placeholder="search..."/> <button style="border:none;margin-left:650px;width:70px;margin-top:30px;padding:17px;" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:600px;height: 750px;position:absolute;margin-left:120px;margin-top:20px">
+            <br><br><br><h4 style="margin-left:15px;color:#1b6d85;margin-top:-30px"> Toutes les ISETs</h4><br>
+            {% for iset in isets %}
+            <button class="accordion " style="font-weight: bold">{{ iset.nom }}</button>
+            <div class="panel">
+                <button class="accordion">Enseignants</button>
+                <div class="panel1">
+                    {% for ens in  iset.enseignants %}
+                        {% if app.user.username==ens.username %}
+                        <h6 style="font-weight: bold;margin-left: 25px">{{ ens.nom |upper}} {{ ens.prenom }} <sapn style="color: silver">&nbsp; &nbsp;(Moi)</sapn></h6>
+                        {% else %}
+                            <h6 style="font-weight: bold;margin-left: 25px">{{ ens.nom |upper}} {{ ens.prenom }}</h6>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="accordion">Classes</button>
+                <div class="panel1">
+                    {% for c in  iset.classes %}
+                        <h6 style="font-weight: bold;margin-left: 25px">{{ c.nom |upper}} </h6>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div  style="background-color:white;border-radius:0%;width:400px;height: 750px;position:absolute;margin-left:740px;margin-top:-55px">
+            <br>
+            <h3 style="color:orangered;text-align: center;margin-top: 15px">Statistiques</h3>
+            <hr>
+            <div id="piechart"></div>
+        </div>
+    <script type="text/javascript">
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+        <script type="text/javascript">
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            // Draw the chart and set the chart values
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Task', 'Hours per Day'],
+                    ['Isets', {{ isets|length }}],
+                    ['Classes', {{ classes|length }}],
+                    ['Etudiants', {{ etudiants|length }}],
+                    ['Enseignants', {{ enseignants|length }}],
+                    ['Supports', {{ supports|length }}],
+                ]);
+
+                // Optional; add a title and set the width and height of the chart
+                var options = {'title':"Vue d'ensemble", 'width':400, 'height':400};
+
+                // Display the chart inside the <div> element with id="piechart"
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+    </body>
+{% endblock %}

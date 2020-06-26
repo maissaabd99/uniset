@@ -1,0 +1,206 @@
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Animate.css -->
+<link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+<!-- Icomoon Icon Fonts-->
+<link rel="stylesheet" href="{{ asset('css/icomoon.css') }}">
+<script src="https://kit.fontawesome.com/a9aa160619.js" crossorigin="anonymous"></script>
+<!-- Bootstrap  -->
+<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+<!-- Magnific Popup -->
+<link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+<!-- Owl Carousel  -->
+<link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+<!-- Theme style  -->
+<link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+<!-- Modernizr JS -->
+<script src="{{ asset('js/modernizr-2.6.2.min.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<!-- jQuery Easing -->
+<script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<!-- Waypoints -->
+<script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
+<!-- Stellar Parallax -->
+<script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
+<!-- Carousel -->
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<!-- countTo -->
+<script src="{{ asset('js/jquery.countTo.js') }}"></script>
+<!-- Magnific Popup -->
+<script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('js/magnific-popup-options.js') }}"></script>
+
+
+<link rel="icon" href="{{ asset('images/favicon.ico') }}" />
+<script src="{{ asset('js/respond.min.js') }}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style id="applicationStylesheet" type="text/css">
+    .sidenav {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 260px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #80C3DF; /* Black */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        /*border-radius: 10%;*/
+    }
+    .sidenav  a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: white;
+        display: block;
+    }
+    ul{
+        color: white;
+    }
+    a:hover{
+        text-underline-mode: white;
+    }
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+    .main {
+        margin-left: 160px; /* Same as the width of the sidebar */
+        padding: 0 10px;
+    }
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+    .badge-notify{
+        background-color:red;
+        /*color: #32233D;*/
+        position:absolute;
+        border-radius: 50%;
+        padding: 2px;
+        margin-top: -4px;
+        margin-left: -4px;
+    }
+</style>
+{% block body%}
+{% if app.user.type=="s"%}
+<div class="sidenav">
+    <img src="{{ asset('images/uniset.png') }}" width="100px" height="100px" style="margin-left:30%" alt="img">
+    <br>
+    <ul>
+        <br>
+        <li><a href="{{ path('etud') }}">Tableau de bord</a></li>
+        <li><a href="{{ path('etudmatieres') }}">Matières</a></li>
+        <li><a href="#">Cours</a></li>
+        <li><a href="{{ path('lib') }}">Librairie</a></li>
+        <li><a href="{{ path('forum') }}">Forum</a></li>
+        <li><a href="{{ path('isets') }}">ISETs</a></li>
+        <li> <a href="{{ path('compte',{'id':app.user.username})}}"> Compte</a></li>
+        <li><a href="{{path('about-UNISET')}}">Contact</a></li>
+
+    </ul>
+</div>
+{% endif%}
+    {% if app.user.type=="e"%}
+<div class="sidenav">
+    <img src="{{ asset('images/uniset.png') }}" width="100px" height="100px" style="margin-left: 30%" alt="img">
+    <br>
+    <ul>
+        <br>
+        <li><a href="{{ path('enst') }}">Tableau de bord</a></li>
+        <li><a href="{{ path('mesclasses') }}">Classes</a></li>
+        <li><a href="{{ path('ajout_support') }}">Cours</a></li>
+        <li><a href="{{ path('lib') }}">Librairie</a></li>
+        <li><a href="{{ path('forum') }}">Forum</a></li>
+        <li><a href="{{ path('isets') }}">ISETs</a></li>
+        <li> <a href="{{ path('compte')}}"> Compte</a></li>
+        <li><a href="{{path('about-UNISET')}}">Contact</a></li>
+
+    </ul>
+</div>
+    {% endif%}
+    {% if app.user.type=="a"%}
+
+        <div class="sidenav">
+        <img src="{{ asset('images/uniset.png') }}" width="100px" height="100px" style="margin-left: 30%" alt="img">
+        <br>
+        <ul>
+            <li class="menu-item-has-children">
+                <a href="{{ path('adm') }}" > Accueil</a>
+            </li>
+       <li class="menu-item-has-children dropdown" >
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> ISET's</a>
+            <ul class="sub-menu children dropdown-menu" style= "background-color:  #80C3DF;">
+                <li><a href="{{path('consulterisets')}}" style="color: #000066">Consulter</a></li>
+                <li><a href="{{ path('ajouteriset') }}"style="color: #000066">Ajouter</a></li>
+            </ul>
+        </li>
+            <li> <a href="{{ path('enseignants')}}"> Enseignants</a></li>
+
+            <li> <a href="{{ path('etudiants')}}"> Etudiants</a></li>
+
+            <li> <a href="{{ path('compte')}}"> Compte</a></li>
+            <li> <a href="{{ path('messages')}}">  Messages</a></li>
+
+
+        </ul>
+        </div>
+    {% endif%}
+
+
+    <script src="{{ asset('build/vendors/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('build/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
+    <script src="{{ asset('build/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('build/assets/js/main.js')}}"></script>
+
+
+    <script src="{{ asset('build/vendors/chart.js/dist/Chart.bundle.min.js')}}"></script>
+    <script src="{{ asset('build/assets/js/dashboard.js')}}"></script>
+    <script src="{{ asset('build/assets/js/widgets.js')}}"></script>
+    <script src="{{ asset('build/vendors/jqvmap/dist/jquery.vmap.min.js')}}"></script>
+    <script src="{{ asset('build/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js')}}"></script>
+    <script src="{{ asset('build/vendors/jqvmap/dist/maps/jquery.vmap.world.js')}}"></script>
+    <script>
+        (function($) {
+            "use strict";
+
+            jQuery('#vmap').vectorMap({
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#1de9b6',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: ['#1de9b6', '#03a9f5'],
+                normalizeFunction: 'polynomial'
+            });
+        })(jQuery);
+    </script>
+<!--table class="table table-hover text-center tab-pane" style="border-left: 20px;" >
+                       <button onclick = "toggle1()" class="btn_2" style="margin-left: 480px"><i class="fas fa-box-open"></i></button>
+                       <thead class="thead-dark">
+               <tr style="font-family: Calibri,serif">
+                   <th scope="col">{/{ iset.nom }}</th>
+               </tr>
+               </thead>
+               <tbody id="{/{ iset.id }}" style="visibility:hidden;">
+               <tr style="color:#122b40;font-family: Calibri,serif">
+               <td rowspan="{/{ iset.enseignants | length }}" style=";font-weight: bold">Enseignants</td>
+               {/% for ens in iset.enseignants %}
+                   {/% if app.user.username==ens.username %}
+                       <td style="color: #5cb85c;font-family: Calibri,serif">{/{ ens.nom |upper }}  {/{ ens.prenom }} <span style="color:slategray;font-weight: bold">(Moi)</span></td>
+                   {/% else %}
+                       <td style="color: #5cb85c;font-family: Calibri,serif">{/{ ens.nom |upper }}  {/{ ens.prenom }}</td>
+                   {/% endif %}
+               </tr>
+               {/% endfor %}
+               </tbody>
+                   </table>
+               {/% endfor %}-->
+{% endblock %}

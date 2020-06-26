@@ -1,0 +1,57 @@
+{% block title %}Ensiegnant {% endblock %}
+{% include 'header.html.twig' %}
+{% block body %}
+    <style>
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp;<i class="fa fa-sign-out" style="font-size:20px" title="Logout"></i>
+        </div>
+        <h3 style="margin-left:120px;margin-top: -40px ">Espace Enseignant <span style="color:#1b6d85;font-size: small"><i class="fas fa-angle-double-right" style="font-size: 18px"></i> </span> Matières <span style="color:#1b6d85"><i class="fas fa-angle-double-right" style="font-size: 18px"></i>  {{ matiere.libelle }} </span></h3>
+        <img src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px">
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+        <input style="position:absolute;margin-top: 30px;margin-left: 150px" id="search" placeholder="search..."/> <button style="border:none;margin-left:680px;width:70px;margin-top:30px;padding:18px;" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:600px;height: 750px;position:absolute;margin-left:150px;margin-top:20px">
+            <br><br><h3 style="margin-left:15px;color:#1b6d85;margin-top:-20px">{{ matiere.libelle }} </h3>
+            <hr>
+            <table class="table table-hover text-center">
+                <thead class="thead-dark text-center">
+                <tr style="color: #5cb85c;font-family: Calibri,serif">
+                    <th scope="col" >Support</th>
+                    <th scope="col" >Date d'ajout</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for support in supports %}
+                    <tr>
+                        <td>{{support.nom}}</td>
+                        <td>{{support.dateAjout | date("m/d/Y")}}</td>
+                        <td><a href="{{ asset('uploads/supports/' ~ support.contenu) }}"><button class="btn btn-select-plan"> View file </button></a></td>
+                        {% if  support.espaceDepot=='oui' %}
+                        <td><a href="{{ path('showdeposers',{'id': support.id}) }}"><i class="fas fa-hand-holding" style="font-size: 26px" title="Voir qui a déposé"></i></a></td>
+                       {% endif %}
+                        <td style="color:#8c8c8c;font-size: 12px"><a href="{{path('deletesupport',{'id': support.id}) }}"><button class="btn" style="padding: 10px" ><i class="fas fa-trash-alt"></i></button></a></td>
+                    </tr>
+                {% else %}
+                    <td colspan="2" style="text-align: center;font-family: Calibri,serif">Cette matière ne contient aucun support pour le moment</td>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('enst') }}" ><button style="margin-left:220px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+        </div>
+        <div style="background-color:white;border-radius:0%;width:350px;height: 750px;position:absolute;margin-left:770px;margin-top:-55px">
+            <br><br>
+            <h4 style="color:orangered;text-align: center">****</h4>
+        </div>
+    </div>
+    </body>
+    {% include 'footer.html.twig' %}
+{% endblock %}

@@ -1,0 +1,115 @@
+{% block title %}Enseignant {% endblock %}
+{% include 'header.html.twig' %}
+{% block body %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp; <a href="{{ path('logout')}}"><i class="fa fa-sign-out" style="font-size:20px;color: #3f3f3f" title="Logout"></i></a>
+        </div>
+        <h2 style="margin-left:120px;margin-top: -40px "> Librairie </h2>
+        <img src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px">
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+        <input style="position:absolute;margin-top: 30px;margin-left: 110px;width:570px" id="search" placeholder="search..."/> <button style="border:none;margin-left:680px;width:70px;margin-top:30px;padding:18px;" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:640px;height: 750px;position:absolute;margin-left:110px;margin-top:20px">
+            <table class="table table-condensed text-center">
+                <thead class="thead-dark">
+                <tr style="text-align: center;color:#1b6d85;font-family: Calibri,serif">
+                    <th scope="col" colspan="4" style="font-size: 19px"><i class="far fa-file-pdf"></i>  Fichiers disponibles</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for c in contenu %}
+                    <tr style="font-size: 15px;color:#5cb85c;text-align: center">
+                        <td style="font-weight: bold">{{ c.categorie}}</td>
+                        <td><a href="{{ asset('uploads/files/' ~ c.support) }}"><button class="btn btn-select-plan"> View file (PDF)</button></a></td>
+                        <td style="color:#8c8c8c;font-size: 12px">Ajouté le {{ c.dateAjout |date("m/d/Y")}} <br>par <span style="font-weight: bold">{{c.enseignant.nom }} {{c.enseignant.prenom }}</span></td>
+                        {% if app.user.username==c.enseignant.username %}
+                            <td style="color:#8c8c8c;font-size: 12px"><a href="{{path('libdelete',{'id': c.id}) }}"><button class="btn" style="padding: 10px" ><i class="fas fa-trash-alt"></i></button></a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if app.user.type=='e' %}
+                <a href="{{ path('enst') }}" ><button style="margin-left:260px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+            {% else %}
+                <a href="{{ path('etud') }}" ><button style="margin-left:260px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+             {% endif %}
+        </div>
+        <div style="background-color:white;border-radius:0%;width:390px;height: 750px;position:absolute;margin-left:770px;margin-top:-55px">
+            {% if app.user.type=='e' %}
+            <br>
+            <h4 style="color:orangered;text-align: center">Ajouter un Support à la libriarie </h4>
+            <hr>
+            {{ form_start(form,{'action': path('libens')}) }}
+                    {{ form_errors(form) }}
+                <i class="fa fa-list-alt" style="margin-left: 10px"></i>
+                {{ form_widget(form.categorie)}}
+                <small>{{ form_help(form.categorie) }}</small>
+                <div class="form-error" >
+                </div>
+                <span><i class="fa fa-file" style="margin-left: 10px;margin-top: 35px"></i>
+                {{ form_widget(form.support) }}</span>
+                <div class="form-error">
+                </div>
+            <br><br>
+            <button class="btn-info" style="border: none;padding: 13px;margin-left: 33%;width:120px" type="submit" >Ajouter</button>
+
+            {{ form_end(form) }}
+            {% else %}
+               <h3 style="color:darkorange;text-align: center"> <i class="far fa-lightbulb"></i>  Hints </h3>
+                <hr>
+             <ul>
+                <h4 style="color:silver;font-weight: bold"><li style="margin-left: -10px">Seulement les enseignants ont le  <br>  droit d'ajouter des supports à la librairie </li></h4>
+            </ul>
+             <hr>
+            <ul>
+                <h5 style="color:silver;font-weight: bold"><li style="margin-left: -10px">Si vous avez des suggestions ou besoin d'un certain support , prière de contacter vos <br> enseignants </li></h5>
+            </ul>
+                <hr>
+                <h4 style="color:orange;margin-left: 10px"> <i class="fas fa-external-link-alt"></i> Liens utiles </h4><br>
+                <ul>
+                    <a href="https://java.developpez.com/cours/"><h5><li>Les meilleurs cours et tutoriels pour apprendre <span style="font-weight:bold;">JAVA</span></li></h5></a>
+                    <a href="https://www.grafikart.fr/formations/symfony-4-pratique"><h5><li>Formation  <span style="font-weight:bold;">Symfony 4 </span>par l'exemple</li></h5></a>
+                    <a href="https://openclassrooms.com/fr/courses/235344-apprenez-a-programmer-en-python"><h5><li>Apprenez à programmer en <span style="font-weight:bold;">Python</span></li></h5></a>
+                    <a href="https://openclassrooms.com/fr/courses/2434016-developpez-des-sites-web-avec-java-ee"><h5><li>Développez des sites web avec<span style="font-weight:bold;"> Java EE</span></li></h5></a>
+                    <a href="https://openclassrooms.com/fr/courses/1916641-dynamisez-vos-sites-web-avec-javascript"><h5><li> Dynamisez vos sites web avec !<span style="font-weight:bold;"> JavaScript </span></li></h5></a>
+                </ul>
+            {% endif %}
+
+            <script type="text/javascript">
+                // Load google charts
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+                //window.alert(tab);
+                // Draw the chart and set the chart values
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable(
+                        [
+                            ['ISET', 'SupportsLibrairieParIsets'],
+                            {% for s in statlib %}
+                            ["{{ s.nom }}", {{ s.nbrsupport }} ],
+                            {% endfor %}
+                    ]);
+                    // Optional; add a title and set the width and height of the chart
+                    var options = {'title':" Nombres de supports par ISETs", 'width':390, 'height':400};
+                    // Display the chart inside the <div> element with id="piechart"
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+            </script>
+            <div id="piechart"></div>
+        </div>
+    </div>
+    </body>
+{% endblock %}

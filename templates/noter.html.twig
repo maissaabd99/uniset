@@ -1,0 +1,61 @@
+{% block title %}Ensiegnant {% endblock %}
+{% include 'header.html.twig' %}
+{% block body %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp;<i class="fa fa-sign-out" style="font-size:20px" title="Logout"></i>
+        </div>
+        <h3 style="margin-left:120px;margin-top: -40px ">Espace Enseignant <span style="color:#1b6d85;font-size: small"><i class="fas fa-angle-double-right" style="font-size: 18px"></i> </span> Matières <span style="color:#1b6d85"><i class="fas fa-angle-double-right" style="font-size: 18px"></i> FeedBack</span></h3>
+        <img src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px">
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+        <input style="position:absolute;margin-top: 30px;margin-left: 110px;width: 550px" id="search" placeholder="search..."/> <button style="border:none;margin-left:660px;width:70px;margin-top:30px;padding:18px;" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:620px;height: 750px;position:absolute;margin-left:110px;margin-top:20px">
+            <br><br><h4 style="margin-left:15px;color:orange;margin-top:-20px"> <i class="far fa-comment-alt"></i> FeedBack</h4>
+            <hr>
+            <table class="table table-hover text-center table-bordered">
+                <tbody>
+                    <tr>
+                        <td style="color: #5cb85c">Déposé par </td>
+                        <td>{{ depot.etudiant.nom |upper }} {{  depot.etudiant.prenom }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #5cb85c">Pour </td>
+                        <td> {{ depot.support.nom }} de la matière {{ depot.support.matiere.libelle }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color: #5cb85c">Dépose le  </td>
+                        <td> {{ depot.date |date }} </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #5cb85c">Note à attribuer  </td>
+                        <td>   <form method="post" action="{{ path('noter',{'id':depot.id}) }}">
+                                   <input type="text" id="note" name="note" style="padding: 12px">
+                                <a href="{{ path('noter',{'id':depot.id}) }}" ><button type="submit" class="btn btn-warning"  style="padding: 14px">Envoyer</button></a>
+                               </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="{{ path('enst') }}" ><button style="margin-left:220px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+        </div>
+        <div style="background-color:white;border-radius:0%;width:410px;height: 750px;position:absolute;margin-left:750px;margin-top:-55px">
+            <br>
+            <h3 style="color:orangered;text-align: center;margin-top: 15px">***</h3>
+            <hr>
+        </div>
+    </div>
+
+    </body>
+    {% include 'footer.html.twig' %}
+{% endblock %}

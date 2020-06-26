@@ -1,0 +1,96 @@
+{% block title %}Ensiegnant {% endblock %}
+{% include 'header.html.twig' %}
+{% block body %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp;<i class="fa fa-sign-out" style="font-size:20px" title="Logout"></i>
+        </div>
+        <h2 style="margin-left:120px;margin-top: -40px ">Supports</h2>
+        <img src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px">
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+        <input style="position:absolute;margin-top: 30px;margin-left: 150px" id="search" placeholder="search..."/> <button style="border:none;margin-left:680px;width:70px;margin-top:30px;padding:18px;" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:600px;height: 750px;position:absolute;margin-left:150px;margin-top:20px">
+          <h4  style="margin-left:15px;color:#1b6d85;margin-top: 14px">Mes supports ajoutés </h4>
+            <hr>
+            <table class="table table-hover text-center">
+                <thead class="thead-dark">
+                <tr style="text-align: center;color:#5cb85c;font-family: Calibri,serif">
+                    <th scope="col"  style="font-size: 15px">Libellé</th>
+                    <th scope="col" style="font-size: 15px">Type</th>
+                    <th scope="col"  style="font-size: 15px">Matière</th>
+                    <th scope="col" style="font-size: 15px" colspan="2">Date d'ajout</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for matiere in matieres %}
+                {%  for supp in matiere.matiere.supports %}
+                    <tr style="font-size: 13px;text-align: center">
+                        <td style="font-weight: bold">{{ supp.nom }}</td>
+                        <td style="font-weight: bold">{{ supp.type }}</td>
+                        <td style="font-weight: bold">{{ supp.matiere.libelle }}</td>
+                        <td style=";font-size: 12px">{{ supp.dateAjout |date("m/d/Y") }}</td>
+                        <td><a href="{{ asset('uploads/supports/' ~ supp.contenu) }}"><button class="btn btn-select-plan"> View file</button></a></td>
+                        <td style="color:#8c8c8c;font-size: 12px"><a href="{{path('deletesupport',{'id': supp.id}) }}"><button class="btn" style="padding: 10px"  ><i class="fas fa-trash-alt"></i></button></a></td>
+                    </tr>
+                {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('enst')}}" ><button style="margin-left:220px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+        </div>
+        <div style="background-color:white;border-radius:0%;width:350px;height: 750px;position:absolute;margin-left:770px;margin-top:-55px">
+            <br><br>
+            <h4 style="color:orangered;text-align: center;margin-top: -8px">Ajouter un Support</h4>
+            <hr>
+            {{ form_start(form,{'action': path('ajout_support')}) }}
+            <select name="matiere" id="mat" style="padding: 12px;margin-left:37px;width: 275px">
+                <option selected disabled>Matière</option>
+                {% for matiere in matieres %}
+                <option value ="{{ matiere.matiere.id}}" id="a">{{ matiere.matiere.libelle}}</option>
+                {% endfor %}
+            </select>
+            {{ form_widget(form.nom) }}
+            {{ form_widget(form.contenu) }}
+            {{ form_widget(form.type) }}
+            {{ form_widget(form.espaceDepot) }}
+            <br><br>
+            <button class="btn-info" style="border: none;padding: 13px;margin-left: 31%;width:120px;" type="submit" >Ajouter</button>
+            {{ form_end(form) }}
+        <div id="piechart"></div>
+        <script type="text/javascript">
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+            //window.alert(tab);
+            // Draw the chart and set the chart values
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable(
+                    [
+                        ['ISET', 'SupportsLibrairieParIsets'],
+                        {% for matiere in matieres %}
+                        ["{{ matiere.matiere.libelle }}", {{matiere.matiere.supports |length}} ],
+                        {% endfor %}
+                    ]);
+                // Optional; add a title and set the width and height of the chart
+                var options = {'title':" Nombres de supports par matière", 'width':350, 'height':400};
+                // Display the chart inside the <div> element with id="piechart"
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+        </script>
+    </div>
+    </div>
+    </body>
+    {% include 'footer.html.twig' %}
+{% endblock %}

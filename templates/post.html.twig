@@ -1,0 +1,138 @@
+{% include 'header.html.twig' %}
+{% block body %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        hr{
+            color:darkorange;
+            height: 8px;
+        }
+        tr th{
+            font-weight: bold;
+        }
+        /* Chat containers */
+        .container {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 10px 0;
+            margin-left: 140px ;
+            width:85%;
+            height: 150px;
+        }
+        .container1 {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 10px 0;
+            margin-left: 170px ;
+            width:75%;
+            height: 120px;
+        }
+        /* Darker chat container */
+        .darker {
+            border-color: #ccc;
+            background-color: #ddd;
+        }
+        /* Clear floats */
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Style images */
+        .container img {
+            float: left;
+            max-width: 40px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+        .container1::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Style images */
+        .container1 img {
+            float: left;
+            max-width: 40px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        /* Style the right image */
+        .container img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right:0;
+        }
+
+        /* Style time text */
+        .time-right {
+            float: right;
+            color: #aaa;
+        }
+
+        /* Style time text */
+        .time-left {
+            float: left;
+            color: #999;
+        }
+        .container2 {
+            border-radius: 5px;
+            background-color: transparent;
+            padding: 20px;
+            width: 700px;
+            margin-left: 250px;
+        }
+    </style>
+    <body style="background-color: #D5E9F1 ">
+    <div class="main" >
+        <h3 style="margin-left:120px ">Espace Etudiant <span style="color:#1b6d85"> <i class="fas fa-angle-double-right" style="font-size: 18px"></i>  Forum de discussion  <i class="fas fa-angle-double-right" style="font-size: 18px"></i> {{ post.topic }} </span></h3>
+        <br>
+        <br>
+            <div class="container">
+                <img src="/images/adminis/{{post.user.img}}"  alt="Avatar">
+                <span style="font-size: 15px;color: #aaa;">{{ post.user.username}}</span>
+                <br>
+                <h4>{{ post.topic}}</h4>
+                <h5>{{ post.contenu}}</h5>
+                <span class="time-right">
+                    <i class="far fa-comment"></i> {{ post.reponses |length}} réponses | {{ post.datePost | date}}
+                    {% if app.user.username ==post.user.username%}
+                        <br><a href="{{ path('delpost',{'id':post.id}) }}"> <i class="fas fa-trash" title="Supprimer ce post" style="margin-left: 200px;font-size: 22px;margin-top: 8px"></i></a>
+                    {% endif %}
+                </span>
+            </div>
+        {% for reponse in reponses %}
+        <div class="container1">
+
+            <img src="/images/adminis/{{reponse.user.img}}"  alt="Avatar">
+            <span style="font-size: 15px;color: #aaa;">{{ reponse.user.username}}</span>
+            <br>
+            <h5>{{ reponse.reponse}}</h5>
+            <span class="time-right">
+                {{reponse.dateReponse | date}}
+                {% if app.user.username ==reponse.user.username%}
+                    <br><a href="{{ path('delreponse',{'id':reponse.id}) }}"><i class="fas fa-trash" style="margin-left: 110px;font-size: 22px;margin-top: 5px" title="Supprimer cette réponse"></i></a>
+                {% endif %}
+            </span>
+        </div>
+
+        {% endfor %}
+        <div class="container2">
+            {{ form_start(form ,{'action':path('addreponse',{'id':post.id})}) }}
+            {{ form_widget(form.reponse)}}
+            <button type="submit" class="btn btn-success" style="margin-left: 20px;width:100px;padding:21px;margin-top: -60px">Envoyer</button>
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+    </body>
+{% endblock %}

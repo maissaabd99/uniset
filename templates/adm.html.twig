@@ -1,0 +1,185 @@
+{% block title %} Espace Administrateur {% endblock %}
+{% include 'header.html.twig' %}
+
+
+{% block body %}
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <link rel="stylesheet" href="{{ asset('build/vendors/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('build/vendors/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('build/vendors/themify-icons/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{ asset('build/vendors/flag-icon-css/css/flag-icon.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('build/vendors/selectFX/css/cs-skin-elastic.css')}}">
+    <link rel="stylesheet" href="{{ asset('build/vendors/jqvmap/dist/jqvmap.min.css')}}">
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp; <a href="{{ path('logout')}}"><i class="fa fa-sign-out" style="font-size:20px;color: #3f3f3f" title="Logout"></i></a>
+        </div>
+        <h2 style="margin-left:120px;margin-top: -40px ">  Espace Administrateur </h2>
+        <br/>
+        &nbsp;&nbsp; <img class=" rounded-circle"  src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px"/>
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+
+
+
+        <div style="background-color:white;border-radius:0%;width:1010px;height:1450px;position:absolute;margin-left:130px;margin-top:30px">
+
+            <div class="card">
+                <div class="card-header">
+                        <h4> Bienvenue <i class="ti-face-smile"></i> <span style="margin-left: 80%">{{ 'now'|date("d/m/yy")}}</span></h4>
+                </div>
+                <div style="background-color:white;border-radius:0%;width:40%;height:150px;position:absolute;margin-left:15px;margin-top:90px">
+                    <h4>Enseignant</h4>
+                    <div class="card-body" style="background-color: powderblue;">
+                    {% for p in result %}
+                        {% if p.nb < 25  %}
+                            {{ p.nom }}
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ p.nb }}%" aria-valuenow="{{ p.nb}}" aria-valuemin="0" aria-valuemax="100">{{ p.nb}}%</div>
+                            </div>
+                        {% else %}
+                            {% if p.nb >= 25 and p.nb <=50%}
+                                {{ p.nom }}
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ p.nb }}%" aria-valuenow="{{ p.nb }}" aria-valuemin="0" aria-valuemax="100">{{ p.nb}}%</div>
+                                </div>
+                            {% else %}
+                                {% if p.nb > 50 and p.nb <=80%}
+                                    {{ p.nom }}
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ p.nb }}%" aria-valuenow="{{ p.nb }}" aria-valuemin="0" aria-valuemax="100">{{ p.nb }}%</div>
+                                    </div>
+                                {% else %}
+                                    {{ p.nom }}
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ p.nb }}%" aria-valuenow="{{ p.nb }}" aria-valuemin="0" aria-valuemax="100">{{ p.nb }}%</div>
+                                    </div> {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div></div>
+            <div style="background-color:white;border-radius:0%;width:40%;height:150px;position:absolute;margin-left:600px;margin-top:50px">
+<h4>Etudiant</h4>
+         <div class="card-body" style="background-color: powderblue;">
+                    {% for p in result2 %}
+                        {% if p.nb < 25  %}
+                            {{ p.nom }}
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ p.nb }}%" aria-valuenow="{{ p.nb}}" aria-valuemin="0" aria-valuemax="100">{{ p.nb}}%</div>
+                            </div>
+                        {% else %}
+                            {% if p.nb >= 25 and p.nb <=50%}
+                                {{ p.nom }}
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ p.nb }}%" aria-valuenow="{{ p.nb }}" aria-valuemin="0" aria-valuemax="100">{{ p.nb}}%</div>
+                                </div>
+                            {% else %}
+                                {% if p.nb > 50 and p.nb <=80%}
+                                    {{ p.nom }}
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ p.nb }}%" aria-valuenow="{{ p.nb }}" aria-valuemin="0" aria-valuemax="100">{{ p.nb }}%</div>
+                                    </div>
+                                {% else %}
+                                    {{ p.nom }}
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ p.nb }}%" aria-valuenow="{{ p.nb }}" aria-valuemin="0" aria-valuemax="100">{{ p.nb }}%</div>
+                                    </div> {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div></div>
+        <div style="background-color:white;border-radius:0%;width:40%;height:150px;position:absolute;margin-left:450px;margin-top:500px">
+
+            <div class="col-xl-3 col-lg-6">
+                <div class="card" style="background-color: powderblue;">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Enseignants</div>
+                                <div class="stat-digit">{{ total}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="fa fa-graduation-cap text-primary border-primary"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">ISET'S</div>
+                                <div class="stat-digit">{{ iset}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+                <div class="card" style="background-color: powderblue;">
+                    <div class="card-body">
+                        <div class="stat-widget-one">
+                            <div class="stat-icon dib"><i class="ti-user text-primary border-primary"></i></div>
+                            <div class="stat-content dib">
+                                <div class="stat-text">Etudiant</div>
+                                <div class="stat-digit">{{ totalet}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+            <div id="piechart"></div>
+        </div>
+    </div>
+    <script src="{{ asset('build/vendors/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('build/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
+    <script src="{{ asset('build/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('build/assets/js/main.js')}}"></script>
+
+
+    <script src="{{ asset('build/vendors/chart.js/dist/Chart.bundle.min.js')}}"></script>
+    <script src="{{ asset('build/assets/js/dashboard.js')}}"></script>
+    <script src="{{ asset('build/assets/js/widgets.js')}}"></script>
+    <script src="{{ asset('build/vendors/jqvmap/dist/jquery.vmap.min.js')}}"></script>
+    <script src="{{ asset('build/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js')}}"></script>
+    <script src="{{ asset('build/vendors/jqvmap/dist/maps/jquery.vmap.world.js')}}"></script>
+    <script>
+        (function($) {
+            "use strict";
+
+            jQuery('#vmap').vectorMap({
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#1de9b6',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: ['#1de9b6', '#03a9f5'],
+                normalizeFunction: 'polynomial'
+            });
+        })(jQuery);
+    </script>
+    </body>
+{% endblock %}

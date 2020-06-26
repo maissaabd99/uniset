@@ -1,0 +1,115 @@
+{% block title %}Ensiegnant {% endblock %}
+{% include 'header.html.twig' %}
+
+{% block body %}
+
+    <style>
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:  #D5E9F1 ">
+
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp;<i class="fa fa-sign-out" style="font-size:20px" title="Logout"></i>
+        </div>
+        <h2 style="margin-left:120px;margin-top: -40px  ">Espace Enseignant </h2>
+        <input style="position:absolute;margin-top: 30px;margin-left: 150px" id="search" placeholder="search..."/> <button style="margin-left:680px;width:70px;margin-top:30px;padding:18px;border:none" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:600px;height: 250px;position:absolute;margin-left:150px;margin-top:20px">
+            <br><br><h3 style="margin-left:15px;color:#1b6d85;margin-top:-30px"> Vue d'ensemble des matières</h3>
+            <table class="table table-hover ">
+                <thead class="thead-dark">
+                <tr style="color:darkorange;font-family: Calibri,serif">
+                    <th scope="col">Matière</th>
+                    <th scope="col">Nombre de supports</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set break = false %}
+                {% set count = 0 %}
+                {%  for matiere in matieres if count !=2   %}
+                    {% set count = count+1 %}
+                    <tr>
+                    <td>{{ matiere.matiere.libelle }}</td>
+                    <td>{{ matiere.matiere.supports |length }}</td>
+                        {% else %}
+                            <span></span>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('mesmatieres') }}"><button style="margin-left:200px ;padding:16px;border:none;font-weight: bold" class="btn-info">Toutes les matières</button></a>
+        </div>
+        <div style="background-color:white;border-radius:0%;width:350px;height: 750px;position:absolute;margin-left:770px;margin-top:-55px">
+            <img src= "/images/adminis/{{ app.user.img}}"  style="margin-left: 100px;margin-top: 50px;width: 150px;height: 150px;border-radius: 50%">
+            <br><br>
+            <h3 style="text-align: center;color:darkorange">{{ app.user.username}}</h3>
+            <br><br>
+            <table class="table table-condensed text-center">
+                <thead class="thead-dark">
+                <tr style="text-align: center;color:#1b6d85;font-family: Calibri,serif">
+                    <th scope="col" class="c1" >Total Matières</th>
+                    <th scope="col" class="c1" >Total Classes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="font-size: 25px;color:#5cb85c">
+                    <td class="c">{{ matieres | length }}</td>
+                    <td  class="c">{{ classes | length }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="position: absolute;height: 56px;width: 100%;background: white;"><h2 style="text-align: center">Calendrier</h2></div>
+            <iframe style="margin-left: 25px" src="https://calendar.google.com/calendar/embed?height=250&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Africa%2FTunis&amp;src=bWFpc3NhLmFiZGVsd2FoZWQ5OUBnbWFpbC5jb20&amp;src=MTloaXJ1ZXZnNjk3dmU4aWE0NTQ0cHRmbmdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZnIudG4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23039BE5&amp;color=%23F4511E&amp;color=%230B8043&amp;showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0" style="border-width:0" width="300" height="250" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div style="background-color:white;border-radius:8%;width:300px;height: 350px;position:absolute;margin-left:150px;margin-top:290px">
+            <br><h3 style="text-align: center;color: #1b6d85">Ajouter un support</h3>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"  style="text-align: center;color:#5cb85c" colspan="2">Supports</th>
+                </tr>
+                </thead>
+                <tbody style="text-align: center">
+                <tr>
+                    <td><a href="{{ path('ajout_support') }}" > Cours </a></td>
+                    <td><a href="{{ path('ajout_support') }}"><i class="far fa-plus-square"></i></a></td>
+                    </a>
+                </tr>
+                <tr>
+                    <td> <a href="{{ path('ajout_support') }}" >TD</a></td>
+                    <td><a href="{{ path('ajout_support') }}" ><i class="far fa-plus-square"></i></a></td>
+                </tr>
+                <tr>
+                    <td><a href="{{ path('ajout_support') }}">TP </a></td>
+                    <td><a href="{{ path('ajout_support') }}" ><i class="far fa-plus-square"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="background-color:white;border-radius:8%;width:280px;height: 350px;position:absolute;margin-left:470px;margin-top:290px">
+            <br><h3 style="text-align: center;color: #5cb85c">Tous les Messages</h3>
+            <br>
+            <table class="table table-hover">
+
+                <tbody style="text-align: center">
+                <tr>
+                    <td><a href="#" > Chiheb </a></td>
+                    <td><a href="#" >Hello how are you bro ?</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#" > Adem</a></td>
+                    <td><a href="#" >Est ce que ça c'est normal !</a></td>
+                </tr>
+
+                </tbody></table>
+            <a href="#" style="text-align: center;color:#1b6d85"><h5 style="text-align: center;color: darkorange">Voir tout</h5></a>
+
+        </div>
+    </div>
+    </body>
+{% endblock %}

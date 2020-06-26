@@ -1,0 +1,116 @@
+{% block title %} Espace Administrateur {% endblock %}
+{% include 'header.html.twig' %}
+
+
+{% block body %}
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 20px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+              &nbsp; &nbsp; &nbsp; <a href="{{ path('logout')}}"><i class="fa fa-sign-out" style="font-size:20px;color: #3f3f3f" title="Logout"></i></a>
+        </div>
+        <h2 style="margin-left:120px;margin-top: -40px ">  Espace Administrateur </h2>
+        <br/>
+            &nbsp;&nbsp; <img class=" rounded-circle"  src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px"/>
+
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+<br/><br/><br/>
+        <input style="position:absolute;margin-top: 30px;margin-left: 350px" id="search" placeholder="search..."/> <button style="margin-left:880px;width:70px;margin-top:30px;padding:18px;border:none" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+
+
+        <div style="background-color:white;border-radius:0%;width:1010px;height: 4400px;position:absolute;margin-left:130px;margin-top:40px">
+        <style>.md-avatar.size-4 {
+                width: 50px;
+                height: 50px;
+            }
+            hr{
+                color:darkorange;
+                height: 8px;
+            }
+            tr th{
+                font-weight: bold;
+            }
+            #search{
+                border:none;
+                padding:15px;
+                width: 530px;
+        </style>
+<br/><br/>
+            {% for message in app.flashes('success') %}
+            <div class="col-sm-10" style="margin-left: 8%;">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">Success</span>  &nbsp;{{ message }} .
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+
+
+        {% endfor %}
+            <br/><br/><br/>
+        <br/>
+        <div class="col-lg">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Ensemble des Etudiants</strong>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead style="background-color: #D5E9F1;">
+                        <tr >
+                            <th  scope="col"># id</th>
+                            <th  scope="col">Image</th>
+                            <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nom</th>
+                            <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prenom</th>
+                            <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cin</th>
+                            <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Classe</th>
+                            <th class="text-center" scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for a in x %}
+
+                                <tr>
+                                    <th scope="row"># {{ a.id }}</th>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <td><img  src="/images/adminis/{{a.img}}" alt="Card image cap"  style="width: 100px;height: 100px;padding-left: 0px" ></td>
+
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ a.nom}}</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ a.prenom}}</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ a.cin}}</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ a.classe.nom}}</td>
+
+
+                                    <td class="text-center"> <a href="{{ path('Supprimeretd',{'id':a.id}) }}"> <button type="button" class="btn btn-danger" style="width: 120px"><i class="fa fa-minus-circle"></i>&nbsp; Supprimer</button></a>
+
+                                </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div></div>
+
+
+
+
+
+
+
+
+
+            <div id="piechart"></div>
+        </div>
+
+    </body>
+{% endblock %}

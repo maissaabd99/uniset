@@ -1,0 +1,108 @@
+{% include 'header.html.twig' %}
+{% block body %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        hr{
+            color:darkorange;
+            height: 8px;
+        }
+        tr th{
+            font-weight: bold;
+        }
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:  #D5E9F1 ">
+    <div class="main" >
+        <h3 style="margin-left:120px "> Espace Etudiant <i class="fas fa-angle-double-right" style="font-size: 18px"></i> <span style="font-size: 23px">Matières</span> <i class="fas fa-angle-double-right" style="font-size: 18px"></i> <span style="font-size: 23px"> {{ support.matiere.libelle }}</span> <i class="fas fa-angle-double-right" style="font-size: 18px"></i> <span style="font-size: 23px">{{ support.nom }}</span> <span style="font-size: 23px;color: #1b6d85"> <i class="fas fa-angle-double-right" style="font-size: 18px"></i>  Espace de dépôt</span></h3>
+        <input style="position:absolute;margin-top: 30px;margin-left: 150px" id="search" placeholder="search..."/> <button style="margin-left:680px;width:70px;margin-top:30px;padding:18px;border:none" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:600px;height: 750px;position:absolute;margin-left:150px;margin-top:20px">
+            <br><br><h3 style="margin-left:15px;color:#1b6d85;margin-top:-20px">Déposer ici <i class="far fa-hand-point-down" style="font-size: 22px ;color:#1b6d85"></i></h3>
+            <hr>
+            <br><br>
+           {{ form_start(form) }}
+            {{ form_errors(form.travail) }}
+                {{ form_widget(form.travail) }}
+                <a href="{{ path('deposesupport',{'id':support.id}) }}" ><button style="margin-left:310px;margin-top: 50px;padding: 13px;width: 120px;border:none;" class="btn-info">Déposer</button></a>
+           {{ form_end(form) }}
+           <a href="{{ path('matiere',{'id':support.matiere.id}) }}" ><button style="margin-left:170px;margin-top: -60px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+           <br>
+            <br>
+            <table class=" table table-bordered text-center">
+                {%  for t in travail %}
+                <thead>
+                <tr>
+                    <td style="background-color: #E7F5FF ;font-weight: bold">Travail deposé par </td>
+                    <td>{{ t.etudiant.nom | upper }} {{ t.etudiant.prenom }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="background-color: #E7F5FF ;font-weight: bold"> Pour </td>
+                    <td>{{ t.support.nom | upper }} de la matière {{ t.support.matiere.libelle }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #E7F5FF ;font-weight: bold"> Déposé le  </td>
+                    <td>{{ t.date | date}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><a href="{{ path('download',{'id':t.id}) }}"><button class="btn btn-select-plan"> {{ t.travail }}</button></a>
+                    </td>
+                </tr>
+                </tbody>
+                {% else %}
+                <thead>
+                <tr>
+                    <td style="color:#d58512 ;font-weight: bold">Aucun travail n'a été deposé pour ce support ! </td>
+                </tr>
+                </thead>
+                {% endfor %}
+            </table>
+        </div>
+        <div style="background-color:white;border-radius:0;width:350px;height: 750px;position:absolute;margin-left:770px;margin-top:-55px">
+           <h3 style="color:orangered;text-align: center"> <i class="far fa-comment-alt"></i> Feed Back </h3>
+          <hr>
+            <br><br>
+            <table class=" table table-bordered text-center">
+                <thead>
+                <tr>
+                    <td style="background-color: #E7F5FF ;font-weight: bold">Matière</td>
+                    <td>{{ support.matiere }}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="background-color: #E7F5FF ;font-weight: bold">Support</td>
+                    <td>{{ support.nom }}</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #E7F5FF ;font-weight: bold">Date d'ajout de support</td>
+                    <td>{{ support.dateAjout | date}}</td>
+                </tr>
+                <tr>
+                    {%  for t in travail %}
+                    <td style="background-color: #E7F5FF ;font-weight: bold">Date de dépot du travail</td>
+                    <td>{{ t.date | date}}</td>
+
+                </tr>
+                <tr>
+                    {% if t.note > 0 %}
+                        <td colspan="2" style="background-color: #E7F5FF ;font-weight: bold"><span style="font-weight: bold;color: brown">Note :  </span> {{ t.note }}</td>
+                    {% else %}
+                        <td colspan="2" style="background-color: #E7F5FF ;font-weight: bold"><span style="font-weight: bold;color: brown">Note :  </span> Pas encore attribué</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+            <br><br>
+        </div>
+    </div>
+    {% include 'footer.html.twig' %}
+
+    </body>
+
+{% endblock %}

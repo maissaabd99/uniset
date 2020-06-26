@@ -1,0 +1,63 @@
+{% block title %}Ensiegnant {% endblock %}
+{% include 'header.html.twig' %}
+{% block body %}
+    <style>
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:#D5E9F1 ">
+    <div class="main" >
+        <div style="margin-left:900px;margin-top: 10px;width: 150px;height: 30px;">
+            <i class="fas fa-envelope" style="font-size:20px" title="Messages"></i>
+            <span class="badge badge-notify" >2</span>
+            &nbsp; &nbsp; &nbsp;<i class="fa fa-sign-out" style="font-size:20px" title="Logout"></i>
+        </div>
+        <h2 style="margin-left:120px;margin-top: -28px;">Espace Enseignant <span style="color:#1b6d85;font-size: small"> >> </span> Classes </h2>
+        <img src="/images/adminis/{{ app.user.img}}" style="margin-left:120px;border-radius: 50%; " alt="userImg" width="45px" height="45px">
+        <h4 style="margin-left:180px;margin-top: -34px "> {{app.user.username}} </h4>
+        <input style="position:absolute;margin-top: 30px;margin-left: 150px" id="search" placeholder="search..."/> <button style="border:none;margin-left:680px;width:70px;margin-top:30px;padding:18px;" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:600px;height: 750px;position:absolute;margin-left:150px;margin-top:20px">
+            <br><br><h3 style="margin-left:15px;color:#1b6d85;margin-top:-30px"> Mes classes</h3>
+                <table class="table table-hover text-center">
+                    <thead class="thead-dark text-center">
+                    <tr style="color: #5cb85c;font-family: Calibri,serif">
+                        <th scope="col" >Classes</th>
+                        <th scope="col">Nombre des étudiants</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for classe in classes %}
+                        <tr>
+                            <td style="text-align: center;font-family: Calibri,serif">{{ classe.classe.nom}}</td>
+                            <td>{{classe.classe.etudiants | length}}</td>
+                            {% if  classe.classe.etudiants | length !=0 %}
+                            <td style="color:#8c8c8c;font-size: 12px"><button class="btn" style="padding: 10px" disabled><i class="fas fa-trash-alt" title="Cette classe n'est pas vide !"></i></button></td>
+                             {% else %}
+                                 <td style="color:#8c8c8c;font-size: 12px"><a href="{{path('deleteclasse',{'id': classe.classe.id}) }}"><button class="btn" style="padding: 10px" ><i class="fas fa-trash-alt" title="Supprimer cette classe" ></i></button></a></td>
+                              {% endif %}
+                                 </tr>
+                        {% else %}
+                        <td colspan="2" style="text-align: center;font-family: Calibri,serif">Vous ne possedez aucune classe pour le moment</td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            <a href="{{ path('enst') }}" ><button style="margin-left:220px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+        </div>
+        <div style="background-color:white;border-radius:0%;width:350px;height: 750px;position:absolute;margin-left:770px;margin-top:-55px">
+            <br><br>
+            <h4 style="color:orangered;text-align: center;margin-top: -8px">Ajouter une classe</h4>
+            <hr>
+            {{ form_start(form,{'action': path('addclasse')}) }}
+            <i class="fa fa-list-alt" style="margin-left: 10px"></i>
+            {{ form_widget(form.nom) }}
+            <br><br>
+            <button class="btn-info" style="border: none;padding: 13px;margin-left: 31%;width:120px;" type="submit" >Ajouter</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    </body>
+   {% include 'footer.html.twig' %}
+{% endblock %}

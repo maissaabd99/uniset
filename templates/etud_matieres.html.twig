@@ -1,0 +1,56 @@
+{% include 'header.html.twig' %}
+{% block body %}
+    <style>
+        hr{
+            color:darkorange;
+            height: 8px;
+        }
+        tr th{
+            font-weight: bold;
+        }
+        #search{
+            border:none;
+            padding:15px;
+            width: 530px;
+        }
+    </style>
+    <body style="background-color:  #D5E9F1 ">
+    <div class="main" >
+        <h2 style="margin-left:120px ">Espace Etudiant</h2>
+        <input style="position:absolute;margin-top: 30px;margin-left: 150px" id="search" placeholder="search..."/> <button style="margin-left:680px;width:70px;margin-top:30px;padding:18px;border:none" class="btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+        <div style="background-color:white;border-radius:0%;width:600px;height: 750px;position:absolute;margin-left:150px;margin-top:20px">
+            <br><br><h3 style="margin-left:15px;color:#1b6d85;margin-top:-20px"> Mes matières</h3>
+            <hr>
+            <table class="table table-hover text-center">
+                <thead class="thead-dark text-center">
+                <tr style="color: #5cb85c;font-family: Calibri,serif">
+                    <th scope="col" >Libellé de la matière</th>
+                    <th scope="col" >Enseignant</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for e in en %}
+                <tr>
+                    {% for m in e.enseignant.ensMatieres %}
+                        <td><a href="{{ path('matiere',{'id':m.matiere.id}) }}">{{ m.matiere.libelle }}</a></td>
+                        <td style="font-weight: bold">{{ m.enseignant.nom |upper }} {{ m.enseignant.prenom  }}</td>
+                        </tr>
+                    {%endfor %}
+                {% else %}
+                    <td colspan="2" style="text-align: center;font-family: Calibri,serif">Vous ne possedez aucune matière pour le moment</td>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('etud') }}" ><button style="margin-left:220px;padding: 13px;width: 120px;border:none;" class="btn-info">Retour</button></a>
+        </div>
+        <div style="background-color:white;border-radius:0%;width:350px;height: 750px;position:absolute;margin-left:770px;margin-top:-55px">
+            <img src= "/images/adminis/{{ app.user.img}}" style="margin-left: 100px;margin-top: 50px;width: 150px;height: 150px;border-radius: 50%" alt="Img User" >
+            <br><br>
+            <h3 style="text-align: center;color:darkorange"> <a href="{{path('logout')}}">{{  app.user.username}}</a></h3>
+            <h5 style="text-align: center;color:midnightblue;font-weight: bold">{{etud.classe  }} - {{ etud.classe.iset }}</h5>
+            <br><br>
+        </div>
+        </div>
+    </body>
+    {% include 'footer.html.twig' %}
+{% endblock %}

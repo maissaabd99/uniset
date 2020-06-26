@@ -1,0 +1,40 @@
+create table cat_cli(
+codc number(4) PRIMARY KEY,
+nomc varchar2(20),
+ca number(10,3),
+cred number(10,3),
+credmax number(10,3),
+categorie varchar2(20),
+etatcred varchar2(20));
+Set serveroutput on 
+DECLARE
+    nomcli cat_cli.nomc%type;
+    code cat_cli.codc%type;
+    cac cat_cli.ca%type;
+    credit client.cred%type;
+    creditmax client.credmax%type;
+    cat cat_cli.categorie%type;
+    etat cat_cli.etatcred%type;
+    cursor clnt is select codc,nomc from client;
+
+BEGIN
+    open clnt;
+    loop
+      fetch clnt into code,nomcli;
+      select sum(mntc) into cac from commande where codc=code; 
+      if cac>10000 then cat:='Client fidele !';
+      elsif cac>=5000 and cac<=10000 then cat:='Bon client !';		
+      elsif cac<5000 then cat:='Client passager !';
+      end if;
+      select cred ,credmax  into credit , creditmax from client where codc=code;
+      if credit>creditmax then etat:='Client douteux !';
+      elsif credit> creditmax/2  and credit<creditmax then etat:='Client doit regler !';	
+      elsif credit<creditmax/2  then etat:='Client solvable !';
+      end if;
+      INSERT  INTO  cat_cli(codc,nomc,ca,cred,credmax,categorie,etatcred) values(code,nomcli,cac,credit,creditmax,cat,etat);
+      commit;
+      exit when clnt%notfound;
+    end loop;
+    close clnt;
+END;
+/
